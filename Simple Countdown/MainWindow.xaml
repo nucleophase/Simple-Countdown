@@ -8,6 +8,7 @@
     <Grid>
         <Label x:Name="labelCountdown" Content="Label" HorizontalAlignment="Center" Margin="10,93,10,130" VerticalAlignment="Center" FontSize="250" Background="#00000000"/>
         <DatePicker x:Name="dateEndTime" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Bottom" SelectedDateChanged="dateEndTime_SelectedDateChanged" SelectedDateFormat="Long"/>
+        
         <Button x:Name="buttonExit" Content="Exit" Margin="10" VerticalAlignment="Bottom" Width="75" HorizontalAlignment="Right" Click="buttonExit_Click" Background="{x:Null}"/>
 
     </Grid>

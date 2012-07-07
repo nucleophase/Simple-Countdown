@@ -36,7 +36,6 @@ namespace Simple_Countdown
             System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
-
             timer.Start();
 
             
