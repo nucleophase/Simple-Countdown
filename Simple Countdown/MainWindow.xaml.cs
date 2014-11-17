@@ -43,10 +43,10 @@ namespace Simple_Countdown
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (dateEndTime.SelectedDate != null)
+            if (dateEndTime.Value != null)
             {
                 
-                TimeSpan timeRemaining = dateEndTime.SelectedDate.Value.Subtract(DateTime.Now);
+                TimeSpan timeRemaining = (TimeSpan)(dateEndTime.Value - DateTime.Now);
                 timeRemaining = timeRemaining.Add(new TimeSpan(9, 0, 0)); // This sets it to 9am. Always 9am. Because that's what I want. Change the 9 to change the time.
                 labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
             }
@@ -57,7 +57,7 @@ namespace Simple_Countdown
             this.Close();
         }
 
-        private void dateEndTime_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void dateEndTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             dateEndTime.Visibility = System.Windows.Visibility.Collapsed;
         }
