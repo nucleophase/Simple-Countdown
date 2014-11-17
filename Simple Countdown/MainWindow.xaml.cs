@@ -47,7 +47,6 @@ namespace Simple_Countdown
             {
                 
                 TimeSpan timeRemaining = (TimeSpan)(dateEndTime.Value - DateTime.Now);
-                timeRemaining = timeRemaining.Add(new TimeSpan(9, 0, 0)); // This sets it to 9am. Always 9am. Because that's what I want. Change the 9 to change the time.
                 labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
             }
         }
