@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Simple_Countdown
 {
@@ -49,6 +50,13 @@ namespace Simple_Countdown
                 TimeSpan timeRemaining = (TimeSpan)(dateEndTime.Value - DateTime.Now);
                 labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
             }
+            //http://thispointer.spaces.live.com/blog/cns!74930F9313F0A720!252.entry?_c11_blogpart_blogpart=blogview&_c=blogpart#permalink
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                secondHand.Angle = DateTime.Now.Second * 6;
+                minuteHand.Angle = DateTime.Now.Minute * 6;
+                hourHand.Angle = (DateTime.Now.Hour * 30) + (DateTime.Now.Minute * 0.5);
+            }));
         }
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)
@@ -60,5 +68,6 @@ namespace Simple_Countdown
         {
             dateEndTime.Visibility = System.Windows.Visibility.Collapsed;
         }
+
     }
 }
