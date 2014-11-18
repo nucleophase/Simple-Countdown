@@ -63,11 +63,5 @@ namespace Simple_Countdown
         {
             this.Close();
         }
-
-        private void dateEndTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            dateEndTime.Visibility = System.Windows.Visibility.Collapsed;
-        }
-
     }
 }
