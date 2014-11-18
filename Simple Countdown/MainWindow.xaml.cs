@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -48,6 +49,13 @@ namespace Simple_Countdown
             {
                 
                 TimeSpan timeRemaining = (TimeSpan)(dateEndTime.Value - DateTime.Now);
+                if (timeRemaining.Seconds <= 0)
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        SystemSounds.Beep.Play();
+                    });
+                }
                 labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
             }
             //http://thispointer.spaces.live.com/blog/cns!74930F9313F0A720!252.entry?_c11_blogpart_blogpart=blogview&_c=blogpart#permalink
