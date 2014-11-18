@@ -12,7 +12,7 @@
 
         <Button x:Name="buttonExit" Content="Exit" Margin="10" VerticalAlignment="Bottom" Width="75" HorizontalAlignment="Right" Click="buttonExit_Click" Background="{x:Null}"/>
 
-        <Image x:Name="logo" Source="SanDisk.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,40,0,40" Height="110px" Width="550px"></Image>
+        <Image x:Name="logo" Source="SanDisk.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,40,0,40" Height="90px" Width="500px"></Image>
 
         <Grid Width="300" Height="300" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="207,0,20,20">
             <Image Source="backGround.png" />
