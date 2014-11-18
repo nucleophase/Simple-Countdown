@@ -7,12 +7,12 @@
         <TaskbarItemInfo/>
     </Window.TaskbarItemInfo>
     <Grid>
-        <Label x:Name="labelCountdown" Content="Welcome" HorizontalAlignment="Center" Margin="10,93,10,130" VerticalAlignment="Center" FontSize="300" Background="#00000000"/>
+        <Label x:Name="labelCountdown" Content="Welcome" HorizontalAlignment="Center" Margin="10,93,10,130" VerticalAlignment="Center" FontSize="200" Background="#00000000"/>
         <xctk:DateTimePicker HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Bottom" x:Name="dateEndTime" ValueChanged="dateEndTime_ValueChanged" />
 
         <Button x:Name="buttonExit" Content="Exit" Margin="10" VerticalAlignment="Bottom" Width="75" HorizontalAlignment="Right" Click="buttonExit_Click" Background="{x:Null}"/>
 
-        <Image x:Name="logo" Source="SanDisk.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,40,0,40" Height="130px" Width="600px"></Image>
+        <Image x:Name="logo" Source="SanDisk.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,40,0,40" Height="110px" Width="550px"></Image>
 
     </Grid>
 </Window>
