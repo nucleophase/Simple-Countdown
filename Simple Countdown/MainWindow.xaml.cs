@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Simple_Countdown
 {
@@ -22,7 +24,8 @@ namespace Simple_Countdown
     /// </summary>
     public partial class MainWindow : Window
     {
-  
+        TimeSpan timeRemaining = new TimeSpan(0, 5, 0);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,23 +46,35 @@ namespace Simple_Countdown
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (dateEndTime.SelectedDate != null)
+            if (!string.IsNullOrEmpty(endTime.Text))
             {
-                
-                TimeSpan timeRemaining = dateEndTime.SelectedDate.Value.Subtract(DateTime.Now);
-                timeRemaining = timeRemaining.Add(new TimeSpan(9, 0, 0)); // This sets it to 9am. Always 9am. Because that's what I want. Change the 9 to change the time.
-                labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
+                int minutes = 0;
+                int.TryParse(endTime.Text, out minutes);
+                timeRemaining = new TimeSpan(0, minutes, 0);
+                endTime.Text = "";
             }
+            if (timeRemaining.Seconds <= 0)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    SystemSounds.Beep.Play();
+                });
+            }
+            labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
+            timeRemaining = timeRemaining.Subtract(new TimeSpan(0, 0, 1));
+
+            //http://thispointer.spaces.live.com/blog/cns!74930F9313F0A720!252.entry?_c11_blogpart_blogpart=blogview&_c=blogpart#permalink
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                secondHand.Angle = DateTime.Now.Second * 6;
+                minuteHand.Angle = DateTime.Now.Minute * 6;
+                hourHand.Angle = (DateTime.Now.Hour * 30) + (DateTime.Now.Minute * 0.5);
+            }));
         }
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void dateEndTime_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            dateEndTime.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }
