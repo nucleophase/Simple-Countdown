@@ -24,7 +24,8 @@ namespace Simple_Countdown
     /// </summary>
     public partial class MainWindow : Window
     {
-  
+        TimeSpan timeRemaining = new TimeSpan(0, 5, 0);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,19 +46,23 @@ namespace Simple_Countdown
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (dateEndTime.Value != null)
+            if (!string.IsNullOrEmpty(endTime.Text))
             {
-                
-                TimeSpan timeRemaining = (TimeSpan)(dateEndTime.Value - DateTime.Now);
-                if (timeRemaining.Seconds <= 0)
-                {
-                    Task.Factory.StartNew(() =>
-                    {
-                        SystemSounds.Beep.Play();
-                    });
-                }
-                labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
+                int minutes = 0;
+                int.TryParse(endTime.Text, out minutes);
+                timeRemaining = new TimeSpan(0, minutes, 0);
+                endTime.Text = "";
             }
+            if (timeRemaining.Seconds <= 0)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    SystemSounds.Beep.Play();
+                });
+            }
+            labelCountdown.Content = String.Format("{0}:{1:00}:{2:00}:{3:00}", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds);
+            timeRemaining = timeRemaining.Subtract(new TimeSpan(0, 0, 1));
+
             //http://thispointer.spaces.live.com/blog/cns!74930F9313F0A720!252.entry?_c11_blogpart_blogpart=blogview&_c=blogpart#permalink
             this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
             {
